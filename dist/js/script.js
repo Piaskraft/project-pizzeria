@@ -165,7 +165,7 @@
         }
       }
 
-      thisProduct.priceElem.innerHTML = price;
+      thisProduct.priceElem.innerHTML = '$' + price;
     }
 
 
