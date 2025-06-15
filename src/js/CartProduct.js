@@ -18,6 +18,9 @@ class CartProduct {
 
         console.log('✅ CartProduct utworzony:', thisCartProduct);
 
+        thisCartProduct.initActions();
+
+
     }
     initActions() {
         const thisCartProduct = this;
@@ -37,8 +40,7 @@ class CartProduct {
             thisCartProduct.dom.wrapper.dispatchEvent(removeEvent);
         });
     }
-      
-}export default CartProduct;
+
+} export default CartProduct;
 
 
-   

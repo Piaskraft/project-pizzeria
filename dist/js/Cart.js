@@ -2,6 +2,10 @@ import { select, templates, settings } from './settings.js';
 
 import CartProduct from './CartProduct.js';
 
+import { utils } from './utils.js';
+
+
+
 
 
 
@@ -138,12 +142,14 @@ class Cart {
         // stwórz instancję CartProduct i zapisz ją
         const productData = {
             id: product.id,
-            name: product.data.name,
-            amount: product.amountWidget.value,
-            priceSingle: product.priceSingle || product.data.price,
-            price: product.price || product.data.price,
-            params: product.prepareCartProductParams?.() || {},
+            name: product.name,
+            amount: product.amount,
+            priceSingle: product.priceSingle,
+            price: product.price,
+            params: product.params,
         };
+
+
 
         const cartProduct = new CartProduct(productData, generatedDOM);
 

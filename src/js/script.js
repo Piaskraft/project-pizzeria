@@ -92,6 +92,62 @@ class Product {
     thisProduct.initAmountWidget();
     thisProduct.processOrder();
   }
+  prepareCartProduct() {
+    const thisProduct = this;
+
+    const productSummary = {
+      id: thisProduct.id,
+      name: thisProduct.data.name,
+      amount: thisProduct.amountWidget.value,
+      priceSingle: thisProduct.priceSingle,
+      price: thisProduct.priceSingle * thisProduct.amountWidget.value,
+      params: thisProduct.prepareCartProductParams(),
+    };
+
+    return productSummary;
+  }
+
+
+  addToCart() {
+    const thisProduct = this;
+
+    const event = new CustomEvent('add-to-cart', {
+      bubbles: true,
+      detail: {
+        product: thisProduct.prepareCartProduct(),
+      }
+    });
+
+    thisProduct.element.dispatchEvent(event);
+  }
+
+  prepareCartProductParams() {
+    const thisProduct = this;
+
+    const formData = utils.serializeFormToObject(thisProduct.form);
+    const params = {};
+
+    for (let paramId in thisProduct.data.params) {
+      const param = thisProduct.data.params[paramId];
+
+      params[paramId] = {
+        label: param.label,
+        options: {}
+      };
+
+      for (let optionId in param.options) {
+        const option = param.options[optionId];
+        const optionSelected = formData[paramId] && formData[paramId].includes(optionId);
+
+        if (optionSelected) {
+          params[paramId].options[optionId] = option.label;
+        }
+      }
+    }
+
+    return params;
+  }
+
 
   renderInMenu() {
     const thisProduct = this;
@@ -142,15 +198,8 @@ class Product {
     thisProduct.cartButton.addEventListener('click', function (event) {
       event.preventDefault();
       thisProduct.processOrder();
+      thisProduct.addToCart();
 
-      const addToCartEvent = new CustomEvent('add-to-cart', {
-        bubbles: true,
-        detail: {
-          product: thisProduct,
-        },
-      });
-
-      thisProduct.element.dispatchEvent(addToCartEvent);
     });
   }
 
@@ -188,6 +237,8 @@ class Product {
     }
 
     price *= thisProduct.amountWidget.value;
+    thisProduct.priceSingle = price / thisProduct.amountWidget.value;
+
     thisProduct.priceElem.innerHTML = '$' + price;
   }
 
