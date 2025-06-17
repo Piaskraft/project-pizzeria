@@ -30,8 +30,7 @@
           </div>
           <div class="cart__content">
             <form class="cart__order">
-              <ul class="cart__order-summary no-spacing">
-              </ul>
+              <ul class="cart__order-summary no-spacing"></ul>
               <ul class="cart__order-price">
                 <li class="cart__order-subtotal">
                   <span class="cart__order-price-name">Subtotal:</span>
@@ -62,7 +61,7 @@
 
   <script id="template-cart-product" type="text/x-handlebars-template">
     <li>
-      <div class="widget-amount"> <!-- widget-amount -->
+      <div class="widget-amount">
         <a class="btn-quantity btn-quantity--lt" href="#less"><i class="fas fa-minus"></i></a>
         <input class="amount" type="text" value="{{ amount }}">
         <a class="btn-quantity btn-quantity--lt" href="#more"><i class="fas fa-plus"></i></a>
@@ -89,24 +88,23 @@
   </script>
 
   <script id="template-menu-product" type="text/x-handlebars-template">
-    <article class="product"> <!-- product -->
-
-        <header class="product__header">
-          <h3 class="product__name no-spacing">{{ name }} <i class="fas fa-chevron-down product__icon"></i></h3>
-          <p class="product__base-price no-spacing">${{ price }}</p>
-        </header>
-        <div class="product__description"> <!-- description -->
-          <p>{{{ description }}}</p>
-        </div> <!-- .description -->
-        <div class="product__wrapper"> <!-- details -->
-          <form class="product__order">
-            <ul class="product__params"> <!-- params -->
-              {{#each params as |param paramId| }}
+    <article class="product">
+      <header class="product__header">
+        <h3 class="product__name no-spacing">{{ name }} <i class="fas fa-chevron-down product__icon"></i></h3>
+        <p class="product__base-price no-spacing">${{ price }}</p>
+      </header>
+      <div class="product__description">
+        <p>{{{ description }}}</p>
+      </div>
+      <div class="product__wrapper">
+        <form class="product__order">
+          <ul class="product__params">
+            {{#each params as |param paramId| }}
               {{#ifEquals type "checkboxes"}}
-              <li> <!-- checkboxes -->
+              <li>
                 <h3 class="product__params-title">{{{ label }}}</h3>
                 {{#each options}}
-                <div class="checkbox"> <!-- checkbox -->
+                <div class="checkbox">
                   <label>
                     <input type="checkbox" name="{{ paramId }}" value="{{ @key }}" id="{{ @key }}" {{#if default}}checked{{/if}}>
                     <span class="checkbox__checkmark"></span>
@@ -117,10 +115,10 @@
               </li>
               {{/ifEquals}}
               {{#ifEquals type "radios"}}
-              <li> <!-- radios -->
+              <li>
                 <h3 class="product__params-title">{{{ label }}}</h3>
                 {{#each options}}
-                <div class="checkbox checkbox--round"> <!-- radio -->
+                <div class="checkbox checkbox--round">
                   <label>
                     {{{ label }}} (${{{ price }}})
                     <input type="radio" name="{{ paramId }}" value="{{ @key }}" id="{{ @key }}" {{#if default}}checked{{/if}}>
@@ -131,7 +129,7 @@
               </li>
               {{/ifEquals}}
               {{#ifEquals type "select"}}
-              <li> <!-- select -->
+              <li>
                 <h3 class="product__params-title">{{{ label }}}</h3>
                 <select name="{{ paramId }}">
                   {{#each options}}
@@ -140,36 +138,34 @@
                 </select>
               </li>
               {{/ifEquals}}
-              {{/each}}
-            </ul>
-            <div class="amount"> <!-- controls -->
-              <div class="widget-amount"> <!-- widget-amount -->
-                <h3 class="product__params-title">Select quantity</h3>
-                <a class="btn-quantity" href="#less"><i class="fas fa-minus"></i></a>
-                <input class="amount" type="text">
-                <a class="btn-quantity" href="#more"><i class="fas fa-plus"></i></a>
-              </div>
-              <p class="product__total-price">
-                Total: $<span class="price">{{{ price }}}</span>
-              </p>
-              <div> <!-- add-to-cart -->
-                <a class="btn-primary" href="#add-to-cart">Add to cart</a>
-              </div>
-            </div>
-          </form>
-          <div class="product__images {{ class }}"> <!-- images -->
-            {{#each images}}
-            {{{ this }}}
             {{/each}}
+          </ul>
+          <div class="amount">
+            <div class="widget-amount">
+              <h3 class="product__params-title">Select quantity</h3>
+              <a class="btn-quantity" href="#less"><i class="fas fa-minus"></i></a>
+              <input class="amount" type="text">
+              <a class="btn-quantity" href="#more"><i class="fas fa-plus"></i></a>
+            </div>
+            <p class="product__total-price">
+              Total: $<span class="price">{{{ price }}}</span>
+            </p>
+            <div>
+              <a class="btn-primary" href="#add-to-cart">Add to cart</a>
+            </div>
           </div>
+        </form>
+        <div class="product__images">
+          {{#each images}}
+            <img class="active" src="{{ this }}" alt="">
+          {{/each}}
         </div>
-
-    </article> <!-- .product -->
+      </div>
+    </article>
   </script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js"></script>
   <script src="js/functions.js"></script>
-  <script src="js/data.js"></script>
   <script type="module" src="js/script.js"></script>
 
 </body>

@@ -8,7 +8,8 @@ class CartProduct {
         thisCartProduct.id = productData.id;
         thisCartProduct.name = productData.name;
         thisCartProduct.amount = productData.amount;
-        thisCartProduct.priceSingle = productData.priceSingle;
+        thisCartProduct.priceSingle = parseFloat(productData.priceSingle);
+
         thisCartProduct.price = productData.price;
         thisCartProduct.params = productData.params;
 

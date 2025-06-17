@@ -1,83 +1,9 @@
-/* global Handlebars, utils, dataSource */ // eslint-disable-line no-unused-vars
+/* global Handlebars, utils */ // eslint-disable-line no-unused-vars
 
 import Cart from './Cart.js';
+import { settings, select, classNames, templates } from './settings.js';
 
 'use strict';
-
-const select = {
-  templateOf: {
-    menuProduct: '#template-menu-product',
-    cartProduct: '#template-cart-product',
-  },
-  containerOf: {
-    menu: '#product-list',
-    cart: '#cart',
-  },
-  cart: {
-    toggleTrigger: '.cart__summary',
-    productList: '.cart__order-summary',
-    totalNumber: `.cart__total-number`,
-    totalPrice: '.cart__total-price strong, .cart__order-total .cart__order-price-sum strong',
-    subtotalPrice: '.cart__order-subtotal .cart__order-price-sum strong',
-    deliveryFee: '.cart__order-delivery .cart__order-price-sum strong',
-    form: '.cart__order',
-    formSubmit: '.cart__order [type="submit"]',
-    phone: '[name="phone"]',
-    address: '[name="address"]',
-  },
-  all: {
-    menuProducts: '#product-list > .product',
-    menuProductsActive: '#product-list > .product.active',
-    formInputs: 'input, select',
-  },
-  menuProduct: {
-    clickable: '.product__header',
-    form: '.product__order',
-    priceElem: '.product__total-price .price',
-    imageWrapper: '.product__images',
-    amountWidget: '.widget-amount',
-    cartButton: '[href="#add-to-cart"]',
-  },
-  widgets: {
-    amount: {
-      input: 'input.amount',
-      linkDecrease: 'a[href="#less"]',
-      linkIncrease: 'a[href="#more"]',
-    },
-  },
-  cartProduct: {
-    amountWidget: '.widget-amount',
-    price: '.cart__product-price',
-    edit: '[href="#edit"]',
-    remove: '[href="#remove"]',
-  },
-};
-
-const classNames = {
-  menuProduct: {
-    wrapperActive: 'active',
-    imageVisible: 'active',
-  },
-  cart: {
-    wrapperActive: 'active',
-  },
-};
-
-const settings = {
-  amountWidget: {
-    defaultValue: 1,
-    defaultMin: 1,
-    defaultMax: 9,
-  },
-  cart: {
-    defaultDeliveryFee: 20,
-  },
-};
-
-const templates = {
-  menuProduct: Handlebars.compile(document.querySelector(select.templateOf.menuProduct).innerHTML),
-  cartProduct: Handlebars.compile(document.querySelector(select.templateOf.cartProduct).innerHTML),
-};
 
 class Product {
   constructor(id, data) {
@@ -101,8 +27,27 @@ class Product {
       amount: thisProduct.amountWidget.value,
       priceSingle: thisProduct.priceSingle,
       price: thisProduct.priceSingle * thisProduct.amountWidget.value,
-      params: thisProduct.prepareCartProductParams(),
+      params: {}
     };
+
+    const formData = utils.serializeFormToObject(thisProduct.form);
+
+    for (let paramId in thisProduct.data.params) {
+      const param = thisProduct.data.params[paramId];
+      productSummary.params[paramId] = {
+        label: param.label,
+        options: []
+      };
+
+      for (let optionId in param.options) {
+        const option = param.options[optionId];
+        const optionSelected = formData[paramId] && formData[paramId].includes(optionId);
+
+        if (optionSelected) {
+          productSummary.params[paramId].options.push(option.label);
+        }
+      }
+    }
 
     return productSummary;
   }
@@ -115,7 +60,7 @@ class Product {
       bubbles: true,
       detail: {
         product: thisProduct.prepareCartProduct(),
-      }
+      },
     });
 
     thisProduct.element.dispatchEvent(event);
@@ -132,7 +77,7 @@ class Product {
 
       params[paramId] = {
         label: param.label,
-        options: {}
+        options: {},
       };
 
       for (let optionId in param.options) {
@@ -147,7 +92,6 @@ class Product {
 
     return params;
   }
-
 
   renderInMenu() {
     const thisProduct = this;
@@ -199,10 +143,8 @@ class Product {
       event.preventDefault();
       thisProduct.processOrder();
       thisProduct.addToCart();
-
     });
   }
-
   processOrder() {
     const thisProduct = this;
     const formData = utils.serializeFormToObject(thisProduct.form);
@@ -236,11 +178,13 @@ class Product {
       }
     }
 
+    const pricePerSingle = price;
     price *= thisProduct.amountWidget.value;
-    thisProduct.priceSingle = price / thisProduct.amountWidget.value;
-
+    thisProduct.priceSingle = pricePerSingle;
     thisProduct.priceElem.innerHTML = '$' + price;
   }
+
+
 
   initAmountWidget() {
     const thisProduct = this;
@@ -319,13 +263,24 @@ class AmountWidget {
 const app = {
   initData: function () {
     const thisApp = this;
-    thisApp.data = dataSource;
+    thisApp.data = {};
+
+    const url = settings.db.url + '/' + settings.db.products;
+
+    fetch(url)
+      .then(function (rawResponse) {
+        return rawResponse.json();
+      })
+      .then(function (parsedResponse) {
+        thisApp.data.products = parsedResponse;
+        thisApp.initMenu();
+      });
   },
 
   initMenu: function () {
     const thisApp = this;
-    for (let productData in thisApp.data.products) {
-      new Product(productData, thisApp.data.products[productData]);
+    for (let productData of thisApp.data.products) {
+      new Product(productData.id, productData);
     }
   },
 
@@ -339,7 +294,6 @@ const app = {
     const thisApp = this;
 
     thisApp.initData();
-    thisApp.initMenu();
     thisApp.initCart();
 
     const productList = document.querySelector(select.containerOf.menu);

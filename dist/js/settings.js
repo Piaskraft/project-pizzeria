@@ -12,8 +12,8 @@ export const select = {
   cart: {
     toggleTrigger: '.cart__summary',
     productList: '.cart__order-summary',
-    totalNumber: `.cart__total-number`,
-    totalPrice: '.cart__total-price strong, .cart__order-total .cart__order-price-sum strong',
+    totalNumber: '.cart__total-number',
+    totalPrice: '.cart__order-total .cart__order-price-sum strong',
     subtotalPrice: '.cart__order-subtotal .cart__order-price-sum strong',
     deliveryFee: '.cart__order-delivery .cart__order-price-sum strong',
     form: '.cart__order',
@@ -21,6 +21,7 @@ export const select = {
     phone: '[name="phone"]',
     address: '[name="address"]',
   },
+
   all: {
     menuProducts: '#product-list > .product',
     menuProductsActive: '#product-list > .product.active',
@@ -67,6 +68,11 @@ export const settings = {
   },
   cart: {
     defaultDeliveryFee: 20,
+  },
+  db: {
+    url: '//' + window.location.hostname + ':3131',
+    products: 'products',
+    orders: 'orders',
   },
 };
 
