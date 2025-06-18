@@ -25,24 +25,38 @@ class CartProduct {
         console.log('✅ CartProduct utworzony:', thisCartProduct);
     }
 
-    initActions() {
-        const thisCartProduct = this;
+   initActions() {
+  const thisCartProduct = this;
 
-        thisCartProduct.dom.remove = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.remove);
+  thisCartProduct.dom.remove = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.remove);
 
-        thisCartProduct.dom.remove.addEventListener('click', function (event) {
-            event.preventDefault();
+  thisCartProduct.dom.remove.addEventListener('click', function (event) {
+    event.preventDefault();
 
-            const removeEvent = new CustomEvent('remove', {
-                bubbles: true,
-                detail: {
-                    cartProduct: thisCartProduct,
-                },
-            });
+    const removeEvent = new CustomEvent('remove', {
+      bubbles: true,
+      detail: {
+        cartProduct: thisCartProduct,
+      },
+    });
 
-            thisCartProduct.dom.wrapper.dispatchEvent(removeEvent);
-        });
-    }
+    thisCartProduct.dom.wrapper.dispatchEvent(removeEvent);
+  });
+} // ← KONIEC initActions – to jest bardzo ważne
+
+getData() {
+  const thisCartProduct = this;
+
+  return {
+    id: thisCartProduct.id,
+    name: thisCartProduct.name,
+    amount: thisCartProduct.amount,
+    price: thisCartProduct.price,
+    priceSingle: thisCartProduct.priceSingle,
+    params: thisCartProduct.params
+  };
+}
+
 
     initAmountWidget() {
         const thisCartProduct = this;

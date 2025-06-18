@@ -49,7 +49,7 @@
       "id": "pizza",
       "name": "Nonna Alba's Pizza",
       "price": 20,
-      "description": "The true taste of Italy \u2013 homemade pizza as prepared by our grandmothers in old-fashoned brick ovens. Choose your favorite topping and enjoy your comfort food! All ingredients come straight from eco-friendly, trusted farms in the Italian countryside.",
+      "description": "The true taste of Italy – homemade pizza as prepared by our grandmothers in old-fashoned brick ovens. Choose your favorite topping and enjoy your comfort food! All ingredients come straight from eco-friendly, trusted farms in the Italian countryside.",
       "images": [
         "images/pizza/crust.svg",
         "images/pizza/tomato-sauce.svg",
@@ -200,6 +200,65 @@
           }
         }
       }
+    }
+  ],
+  "orders": [
+    {
+      "phone": "",
+      "address": "",
+      "totalPrice": 29,
+      "subtotalPrice": 9,
+      "totalNumber": 1,
+      "deliveryFee": 20,
+      "products": [
+        {
+          "id": "cake",
+          "name": "Zio Stefano's Doughnut",
+          "amount": 1,
+          "price": 9,
+          "priceSingle": 9,
+          "params": {}
+        }
+      ],
+      "id": 1
+    },
+    {
+      "phone": "",
+      "address": "",
+      "totalPrice": 29,
+      "subtotalPrice": 9,
+      "totalNumber": 1,
+      "deliveryFee": 20,
+      "products": [
+        {
+          "id": "cake",
+          "name": "Zio Stefano's Doughnut",
+          "amount": 1,
+          "price": 9,
+          "priceSingle": 9,
+          "params": {}
+        }
+      ],
+      "id": 2
+    },
+    {
+      "phone": "",
+      "address": "",
+      "totalPrice": 29,
+      "subtotalPrice": 9,
+      "totalNumber": 1,
+      "deliveryFee": 20,
+      "products": [
+        {
+          "id": "cake",
+          "name": "Zio Stefano's Doughnut",
+          "amount": 1,
+          "price": 9,
+          "priceSingle": 9,
+          "params": {}
+        }
+      ],
+      "id": 3
     }
   ]
 }

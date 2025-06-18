@@ -81,7 +81,10 @@ class Cart {
             payload.products.push(product.getData());
         }
 
-        fetch('https://httpbin.org/post', {
+        const url = settings.db.url + '/' + settings.db.orders;
+
+        fetch(url, {
+
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
