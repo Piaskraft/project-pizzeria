@@ -58,9 +58,9 @@ class Cart {
 
         // Uaktualnienie wartości na stronie
         thisCart.dom.totalNumber.innerHTML = totalNumber;
-        thisCart.dom.subtotalPrice.innerHTML = subtotalPrice;
-        thisCart.dom.deliveryFee.innerHTML = deliveryFee;
-        thisCart.dom.totalPrice.innerHTML = totalPrice;
+        thisCart.dom.subtotalPrice.innerHTML = "$"+subtotalPrice;
+        thisCart.dom.deliveryFee.innerHTML ="$"+ deliveryFee;
+        thisCart.dom.totalPrice.innerHTML = "$" + totalPrice;
     }
 
 
