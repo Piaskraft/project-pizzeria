@@ -2,14 +2,13 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <title>Pizzeria</title>
-  <link href="https://fonts.googleapis.com/css?family=Lato:400,300i,700%7COswald:300,500,700&amp;subset=latin-ext"
-    rel="stylesheet">
-  <link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,300i,700%7COswald:300,500,700&subset=latin-ext" rel="stylesheet" />
+  <link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 
 <body>
@@ -17,10 +16,18 @@
   <header class="header">
     <div class="container">
       <div class="header__wrapper">
+        <nav>
+          <ul>
+            <li><a href="#order" class="nav-link" data-page="order">Order</a></li>
+            <li><a href="#booking-page" class="nav-link" data-page="booking-page">Booking</a></li>
+          </ul>
+        </nav>
+
         <div class="logo">
           <h1 class="logo__title"><span>Mamma</span>Mia!</h1>
           <h2 class="logo__subtitle">the best homemade Italian food</h2>
         </div>
+
         <div id="cart" class="cart">
           <div class="cart__summary">
             <span class="cart__total-number">0</span>
@@ -46,8 +53,8 @@
                 </li>
               </ul>
               <div class="cart__order-confirmation">
-                <input type="tel" name="phone" placeholder="Your phone">
-                <input type="text" name="address" placeholder="Your address">
+                <input type="tel" name="phone" placeholder="Your phone" />
+                <input type="text" name="address" placeholder="Your address" />
                 <button type="submit" class="btn-secondary">Order</button>
               </div>
             </form>
@@ -57,8 +64,18 @@
     </div>
   </header>
 
-  <div id="product-list" class="product-list container"></div>
+  <!-- Strona zamówień -->
+  <div id="order">
+    <div id="product-list" class="product-list container"></div>
+  </div>
 
+  <!-- Strona rezerwacji -->
+  <div id="booking-page" class="container" style="display: none;">
+    <h2>Book a table</h2>
+    <div id="booking-widget"></div>
+  </div>
+
+  <!-- Template do koszyka -->
   <script id="template-cart-product" type="text/x-handlebars-template">
     <li>
       <div class="widget-amount">
@@ -87,6 +104,7 @@
     </li>
   </script>
 
+  <!-- Template do produktu -->
   <script id="template-menu-product" type="text/x-handlebars-template">
     <article class="product">
       <header class="product__header">
@@ -108,12 +126,13 @@
                   <label>
                     <input type="checkbox" name="{{ paramId }}" value="{{ @key }}" id="{{ @key }}" {{#if default}}checked{{/if}}>
                     <span class="checkbox__checkmark"></span>
-                    {{{ label }}} (${{{ price }}})
+                    {{{ label }}} (${{{ price }}}) 
                   </label>
                 </div>
                 {{/each}}
               </li>
               {{/ifEquals}}
+
               {{#ifEquals type "radios"}}
               <li>
                 <h3 class="product__params-title">{{{ label }}}</h3>
@@ -128,6 +147,7 @@
                 {{/each}}
               </li>
               {{/ifEquals}}
+
               {{#ifEquals type "select"}}
               <li>
                 <h3 class="product__params-title">{{{ label }}}</h3>
@@ -164,6 +184,7 @@
     </article>
   </script>
 
+  <!-- Skrypty -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js"></script>
   <script src="js/functions.js"></script>
   <script type="module" src="js/script.js"></script>

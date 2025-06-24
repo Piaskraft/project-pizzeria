@@ -2,6 +2,8 @@
 
 import Cart from './Cart.js';
 import { settings, select, classNames, templates } from './settings.js';
+import Booking from './Booking.js'; // ✅ poprawna ścieżka
+
 
 'use strict';
 
@@ -292,15 +294,54 @@ const app = {
 
   init: function () {
     const thisApp = this;
-
+    thisApp.initPages();
     thisApp.initData();
     thisApp.initCart();
+    thisApp.initBooking();
+
 
     const productList = document.querySelector(select.containerOf.menu);
     productList.addEventListener('add-to-cart', function (event) {
       thisApp.cart.add(event.detail.product);
     });
   },
+  initPages: function () {
+  const thisApp = this;
+
+thisApp.pages = document.querySelectorAll('#order, #booking-page');
+
+
+
+
+  thisApp.navLinks = document.querySelectorAll('.nav-link');
+
+  const activatePage = function (pageId) {
+    thisApp.pages.forEach(page => {
+      page.style.display = page.id === pageId ? 'block' : 'none';
+    });
+
+    thisApp.navLinks.forEach(link => {
+      link.classList.toggle('active', link.getAttribute('data-page') === pageId);
+    });
+  };
+
+  for (let link of thisApp.navLinks) {
+    link.addEventListener('click', function (event) {
+      event.preventDefault();
+      const clickedPageId = this.getAttribute('data-page');
+      activatePage(clickedPageId);
+    });
+  }
+
+  activatePage('order'); // domyślnie pokazujemy stronę zamówień
+},
+
+initBooking: function () {
+  const thisApp = this;
+  const bookingContainer = document.querySelector('#booking-widget');
+  thisApp.booking = new Booking(bookingContainer);
+},
+
 };
 
 app.init();
