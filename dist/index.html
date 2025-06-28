@@ -2,13 +2,14 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Pizzeria</title>
-  <link href="https://fonts.googleapis.com/css?family=Lato:400,300i,700%7COswald:300,500,700&subset=latin-ext" rel="stylesheet" />
-  <link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css" />
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,300i,700%7COswald:300,500,700&subset=latin-ext"
+    rel="stylesheet">
+  <link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
@@ -53,8 +54,8 @@
                 </li>
               </ul>
               <div class="cart__order-confirmation">
-                <input type="tel" name="phone" placeholder="Your phone" />
-                <input type="text" name="address" placeholder="Your address" />
+                <input type="tel" name="phone" placeholder="Your phone">
+                <input type="text" name="address" placeholder="Your address">
                 <button type="submit" class="btn-secondary">Order</button>
               </div>
             </form>
@@ -126,7 +127,7 @@
                   <label>
                     <input type="checkbox" name="{{ paramId }}" value="{{ @key }}" id="{{ @key }}" {{#if default}}checked{{/if}}>
                     <span class="checkbox__checkmark"></span>
-                    {{{ label }}} (${{{ price }}}) 
+                    {{{ label }}} (${{{ price }}})
                   </label>
                 </div>
                 {{/each}}
