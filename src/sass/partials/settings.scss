@@ -1,8 +1,15 @@
-/* Variables */
+$base-size: 1rem;
 
-$color-dark: #333;
-$color-light: #fff;
-$color-main: #ff6b6b;
+$color-light: #ffffff;
+$color-dark: #222222;
+$color-main: #e17055;
+$color-secondary: #0984e3;
+
+$color-warning: #f6b93b;
+$color-danger: #e55039;
+$color-success: #78e08f;
+
+/* Variables */
 
 $font-header: 'Oswald', sans-serif;
 $font-text: 'Lato', sans-serif;
@@ -14,8 +21,6 @@ $font-bold: 700;
 
 $transition: all .3s;
 $radius: 4px;
-
-$base-size: 12px;
 
 /* Mixins */
 
@@ -37,13 +42,12 @@ $base-size: 12px;
     background: lighten($btn-bg, 3%);
   }
 
-  // CODE ADDED START
-  &.disabled, &[disabled] {
+  &.disabled,
+  &[disabled] {
     background: desaturate($btn-bg, 100%);
     border-color: desaturate($btn-border, 100%);
     cursor: not-allowed;
   }
-  // CODE ADDED END
 }
 
 @mixin flex($flex-direction, $align-items, $justify-content) {
@@ -80,6 +84,8 @@ $base-size: 12px;
   margin: 0;
   padding: 0;
 }
+
+/* Animations */
 
 @keyframes flipdown {
   0% {
