@@ -45,11 +45,11 @@ class Booking {
   initWidgets() {
     const thisBooking = this;
     flatpickr(thisBooking.dom.dateInput, {
-  defaultDate: new Date(),
-  minDate: new Date(),
-  dateFormat: 'd/m/Y',
-  disableMobile: true,
-});
+    defaultDate: new Date(),
+    minDate: new Date(),
+    dateFormat: 'd/m/Y',
+    disableMobile: true,
+    });
 
 
     thisBooking.peopleAmountWidget = new AmountWidget(thisBooking.dom.peopleAmount);
@@ -68,6 +68,14 @@ class Booking {
     thisBooking.dom.hourInput.addEventListener('input', function () {
       thisBooking.updateHour();
     });
+
+
+    thisBooking.dom.wrapper
+      .querySelector('.booking-form')
+      .addEventListener('submit', function (event) {
+        event.preventDefault();
+        thisBooking.sendBooking();
+      });
   }
 
   updateHour() {
@@ -188,6 +196,49 @@ class Booking {
       });
     }
   }
+    sendBooking() {
+    const thisBooking = this;
+
+    const selectedTable = thisBooking.dom.wrapper.querySelector('.table.selected');
+
+    if (!selectedTable) {
+      alert('Please select a table before booking!');
+      return;
+    }
+
+    const payload = {
+      date: thisBooking.dom.dateInput.value,
+      hour: thisBooking.dom.hourInput.value,
+      table: parseInt(selectedTable.getAttribute(settings.booking.tableIdAttribute)),
+      duration: thisBooking.hoursAmountWidget.value,
+      ppl: thisBooking.peopleAmountWidget.value,
+      starters: [],
+      phone: thisBooking.dom.wrapper.querySelector('[name="phone"]').value,
+      address: thisBooking.dom.wrapper.querySelector('[name="address"]').value,
+    };
+
+    const starters = thisBooking.dom.wrapper.querySelectorAll('[name="starter"]:checked');
+    for (let starter of starters) {
+      payload.starters.push(starter.value);
+    }
+
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    };
+
+    fetch(`${settings.db.url}/${settings.db.bookings}`, options)
+      .then(response => response.json())
+      .then(() => {
+        thisBooking.getData(); // odświeżenie dostępności stolików
+      });
+      console.log('Sending booking:', payload);
+
+  }
+
 }
 
 export default Booking;
