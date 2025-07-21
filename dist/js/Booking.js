@@ -1,4 +1,4 @@
-/* global flatpickr */
+
 
 
 import AmountWidget from './AmountWidget.js';

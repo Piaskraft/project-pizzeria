@@ -4,7 +4,7 @@ import Cart from './Cart.js';
 import { settings, select, classNames, templates } from './settings.js';
 import Booking from './Booking.js';
 import AmountWidget from './AmountWidget.js';
-import HourPicker from './components/HourPicker.js';
+
 
 
 'use strict';
