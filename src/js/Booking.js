@@ -4,6 +4,10 @@
 import AmountWidget from './AmountWidget.js';
 import { select, templates, settings, classNames } from './settings.js';
 import { utils } from './utils.js';
+import DatePicker from './components/DatePicker.js';
+import HourPicker from './components/HourPicker.js';
+
+
 
 class Booking {
   constructor(container) {
@@ -40,16 +44,16 @@ class Booking {
     thisBooking.dom.tables = thisBooking.dom.wrapper.querySelectorAll(select.booking.tables);
     thisBooking.dom.hourDisplay = thisBooking.dom.wrapper.querySelector('.booking__hour-value');
   }
- 
+
 
   initWidgets() {
     const thisBooking = this;
-    flatpickr(thisBooking.dom.dateInput, {
-    defaultDate: new Date(),
-    minDate: new Date(),
-    dateFormat: 'd/m/Y',
-    disableMobile: true,
-    });
+
+   thisBooking.datePicker = new DatePicker(thisBooking.dom.wrapper.querySelector(select.widgets.datePicker.wrapper));
+   thisBooking.hourPicker = new HourPicker(
+  thisBooking.dom.wrapper.querySelector(select.widgets.hourPicker.wrapper)
+);
+
 
 
     thisBooking.peopleAmountWidget = new AmountWidget(thisBooking.dom.peopleAmount);
@@ -69,7 +73,6 @@ class Booking {
       thisBooking.updateHour();
     });
 
-
     thisBooking.dom.wrapper
       .querySelector('.booking-form')
       .addEventListener('submit', function (event) {
@@ -77,6 +80,7 @@ class Booking {
         thisBooking.sendBooking();
       });
   }
+
 
   updateHour() {
     const thisBooking = this;
@@ -196,7 +200,7 @@ class Booking {
       });
     }
   }
-    sendBooking() {
+  sendBooking() {
     const thisBooking = this;
 
     const selectedTable = thisBooking.dom.wrapper.querySelector('.table.selected');
@@ -235,7 +239,7 @@ class Booking {
       .then(() => {
         thisBooking.getData(); // odświeżenie dostępności stolików
       });
-      console.log('Sending booking:', payload);
+    console.log('Sending booking:', payload);
 
   }
 
