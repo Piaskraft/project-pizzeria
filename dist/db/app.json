@@ -6,7 +6,9 @@
       "name": "Zio Stefano's Doughnut",
       "price": 9,
       "description": "Treat yourself with this soft, freshly baked cookie. The recipe has been handed down from generation to generation in our family and it has won us several first place prizes in local competitions.",
-      "images": ["images/doughnut.svg"]
+      "images": [
+        "images/doughnut.svg"
+      ]
     },
     {
       "id": "breakfast",
@@ -14,16 +16,31 @@
       "name": "Zia Giulia's Breakfast",
       "price": 9,
       "description": "There's no better way to start your day than indulging yourself with a cup of fresh Italian coffee and crispy waffels. Made just for you on the spot, this breakfast combo has been our guests' favorite for over 50 years.",
-      "images": ["images/breakfast.svg"],
+      "images": [
+        "images/breakfast.svg"
+      ],
       "params": {
         "coffee": {
           "label": "Coffee type",
           "type": "radios",
           "options": {
-            "latte": { "label": "Latte", "price": 1, "default": true },
-            "cappuccino": { "label": "Cappuccino", "price": 1 },
-            "espresso": { "label": "Espresso", "price": 1 },
-            "macchiato": { "label": "Macchiato", "price": 1 }
+            "latte": {
+              "label": "Latte",
+              "price": 1,
+              "default": true
+            },
+            "cappuccino": {
+              "label": "Cappuccino",
+              "price": 1
+            },
+            "espresso": {
+              "label": "Espresso",
+              "price": 1
+            },
+            "macchiato": {
+              "label": "Macchiato",
+              "price": 1
+            }
           }
         }
       }
@@ -49,32 +66,81 @@
           "label": "Sauce",
           "type": "radios",
           "options": {
-            "tomato": { "label": "Tomato", "price": 0, "default": true },
-            "cream": { "label": "Sour cream", "price": 2 }
+            "tomato": {
+              "label": "Tomato",
+              "price": 0,
+              "default": true
+            },
+            "cream": {
+              "label": "Sour cream",
+              "price": 2
+            }
           }
         },
         "toppings": {
           "label": "Toppings",
           "type": "checkboxes",
           "options": {
-            "olives": { "label": "Olives", "price": 2, "default": true },
-            "redPeppers": { "label": "Red peppers", "price": 2, "default": true },
-            "greenPeppers": { "label": "Green peppers", "price": 2, "default": true },
-            "mushrooms": { "label": "Mushrooms", "price": 2, "default": true },
-            "basil": { "label": "Fresh basil", "price": 2, "default": true },
-            "salami": { "label": "Salami", "price": 3 }
+            "olives": {
+              "label": "Olives",
+              "price": 2,
+              "default": true
+            },
+            "redPeppers": {
+              "label": "Red peppers",
+              "price": 2,
+              "default": true
+            },
+            "greenPeppers": {
+              "label": "Green peppers",
+              "price": 2,
+              "default": true
+            },
+            "mushrooms": {
+              "label": "Mushrooms",
+              "price": 2,
+              "default": true
+            },
+            "basil": {
+              "label": "Fresh basil",
+              "price": 2,
+              "default": true
+            },
+            "salami": {
+              "label": "Salami",
+              "price": 3
+            }
           }
         },
         "crust": {
           "label": "Pizza crust",
           "type": "select",
           "options": {
-            "standard": { "label": "Standard", "price": 0, "default": true },
-            "thin": { "label": "Thin", "price": 2 },
-            "thick": { "label": "Thick", "price": 2 },
-            "cheese": { "label": "Cheese in edges", "price": 5 },
-            "wholewheat": { "label": "Wholewheat", "price": 3 },
-            "gluten": { "label": "With extra gluten", "price": 0 }
+            "standard": {
+              "label": "Standard",
+              "price": 0,
+              "default": true
+            },
+            "thin": {
+              "label": "Thin",
+              "price": 2
+            },
+            "thick": {
+              "label": "Thick",
+              "price": 2
+            },
+            "cheese": {
+              "label": "Cheese in edges",
+              "price": 5
+            },
+            "wholewheat": {
+              "label": "Wholewheat",
+              "price": 3
+            },
+            "gluten": {
+              "label": "With extra gluten",
+              "price": 0
+            }
           }
         }
       }
@@ -99,13 +165,38 @@
           "label": "Ingredients",
           "type": "checkboxes",
           "options": {
-            "cucumber": { "label": "Cucumber", "price": 1, "default": true },
-            "tomatoes": { "label": "Tomatoes", "price": 1, "default": true },
-            "olives": { "label": "Olives", "price": 1, "default": true },
-            "feta": { "label": "Feta cheese", "price": 1 },
-            "cheese": { "label": "Cheese", "price": 1 },
-            "herbs": { "label": "Fresh herbs", "price": 1, "default": true },
-            "pepper": { "label": "Black pepper", "price": 1 }
+            "cucumber": {
+              "label": "Cucumber",
+              "price": 1,
+              "default": true
+            },
+            "tomatoes": {
+              "label": "Tomatoes",
+              "price": 1,
+              "default": true
+            },
+            "olives": {
+              "label": "Olives",
+              "price": 1,
+              "default": true
+            },
+            "feta": {
+              "label": "Feta cheese",
+              "price": 1
+            },
+            "cheese": {
+              "label": "Cheese",
+              "price": 1
+            },
+            "herbs": {
+              "label": "Fresh herbs",
+              "price": 1,
+              "default": true
+            },
+            "pepper": {
+              "label": "Black pepper",
+              "price": 1
+            }
           }
         }
       }
@@ -116,17 +207,75 @@
     {
       "date": "2025-06-25",
       "hour": "12:00",
-      "table": 2
+      "table": 2,
+      "duration": 2,
+      "ppl": 2,
+      "starters": [
+        "water"
+      ],
+      "phone": "123456789",
+      "address": "Test Street",
+      "id": "0675"
     },
     {
       "date": "2025-06-25",
       "hour": "14:00",
-      "table": 3
+      "table": 3,
+      "duration": 1,
+      "ppl": 1,
+      "starters": [],
+      "phone": "987654321",
+      "address": "Another Street",
+      "id": "5c68"
+    },
+    {
+      "id": 1753184481267,
+      "date": "2025-07-24",
+      "hour": "12:00",
+      "table": 1,
+      "duration": 2,
+      "ppl": 1,
+      "starters": [],
+      "phone": "15145474826",
+      "address": "Fuhlestrasse"
+    },
+    {
+      "id": 1753184497414,
+      "date": "2025-07-24",
+      "hour": "12:00",
+      "table": 1,
+      "duration": 2,
+      "ppl": 1,
+      "starters": [],
+      "phone": "15145474826",
+      "address": "Fuhlestrasse"
+    },
+    {
+      "id": 1753184532217,
+      "date": "2025-07-24",
+      "hour": "17:00",
+      "table": 2,
+      "duration": 2,
+      "ppl": 1,
+      "starters": [],
+      "phone": "15145474826",
+      "address": "Fuhlestrasse"
+    },
+    {
+      "id": 1753184537956,
+      "date": "2025-07-24",
+      "hour": "17:00",
+      "table": 1,
+      "duration": 2,
+      "ppl": 1,
+      "starters": [],
+      "phone": "15145474826",
+      "address": "Fuhlestrasse"
     }
   ],
   "events": [
     {
-      "id": 1,
+      "id": "1",
       "date": "2025-06-29",
       "hour": "12:30",
       "table": 1,
@@ -136,27 +285,33 @@
       "starters": []
     },
     {
-      "id": 2,
+      "id": "2",
       "date": "2025-06-29",
       "hour": "16:00",
       "table": 3,
       "repeat": "daily",
       "duration": 2,
       "ppl": 3,
-      "starters": ["bread", "lemonWater"]
+      "starters": [
+        "bread",
+        "lemonWater"
+      ]
     },
     {
-      "id": 3,
+      "id": "3",
       "date": "2025-06-29",
       "hour": "12:00",
       "table": 3,
       "repeat": "daily",
       "duration": 2,
       "ppl": 3,
-      "starters": ["bread", "lemonWater"]
+      "starters": [
+        "bread",
+        "lemonWater"
+      ]
     },
     {
-      "id": 4,
+      "id": "4",
       "date": "2025-06-29",
       "hour": "13:00",
       "table": 2,
@@ -166,14 +321,16 @@
       "starters": []
     },
     {
-      "id": 5,
+      "id": "5",
       "date": "2025-06-29",
       "hour": "18:00",
       "table": 2,
       "repeat": "daily",
       "duration": 2,
       "ppl": 3,
-      "starters": ["lemonWater"]
+      "starters": [
+        "lemonWater"
+      ]
     }
   ]
 }
