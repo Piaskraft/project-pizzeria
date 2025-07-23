@@ -215,7 +215,7 @@
       ],
       "phone": "123456789",
       "address": "Test Street",
-      "id": "0675"
+      "id": "8326"
     },
     {
       "date": "2025-06-25",
@@ -226,51 +226,84 @@
       "starters": [],
       "phone": "987654321",
       "address": "Another Street",
-      "id": "5c68"
+      "id": "c8d6"
     },
     {
-      "id": 1753184481267,
-      "date": "2025-07-24",
+      "id": 1753277113293,
+      "date": "2025-07-23",
       "hour": "12:00",
       "table": 1,
-      "duration": 2,
+      "duration": 1,
       "ppl": 1,
       "starters": [],
-      "phone": "15145474826",
+      "phone": "brak-telefonu",
+      "address": "brak-adresu"
+    },
+    {
+      "id": 1753277138970,
+      "date": "2025-07-23",
+      "hour": "20:00",
+      "table": 1,
+      "duration": 1,
+      "ppl": 1,
+      "starters": [],
+      "phone": "brak-telefonu",
+      "address": "brak-adresu"
+    },
+    {
+      "id": 1753277565470,
+      "date": "2025-07-23",
+      "hour": "24:00",
+      "table": 1,
+      "duration": 1,
+      "ppl": 1,
+      "starters": [],
+      "phone": "+48667001761",
       "address": "Fuhlestrasse"
     },
     {
-      "id": 1753184497414,
-      "date": "2025-07-24",
+      "id": 1753278171609,
+      "date": "2025-07-23",
+      "hour": "24:00",
+      "table": 1,
+      "duration": 1,
+      "ppl": 1,
+      "starters": [],
+      "phone": "+48667001761",
+      "address": "Fuhlestrasse"
+    },
+    {
+      "id": 1753280551354,
+      "date": "2025-07-23",
+      "hour": "24:00",
+      "table": 1,
+      "duration": 1,
+      "ppl": 1,
+      "starters": [],
+      "phone": "+48667001761",
+      "address": "Fuhlestrasse"
+    },
+    {
+      "id": 1753280568736,
+      "date": "2025-07-23",
+      "hour": "24:00",
+      "table": 1,
+      "duration": 1,
+      "ppl": 1,
+      "starters": [],
+      "phone": "+48667001761",
+      "address": "Fuhlestrasse"
+    },
+    {
+      "id": 1753281198316,
+      "date": "2025-07-23",
       "hour": "12:00",
       "table": 1,
-      "duration": 2,
+      "duration": 1,
       "ppl": 1,
       "starters": [],
-      "phone": "15145474826",
-      "address": "Fuhlestrasse"
-    },
-    {
-      "id": 1753184532217,
-      "date": "2025-07-24",
-      "hour": "17:00",
-      "table": 2,
-      "duration": 2,
-      "ppl": 1,
-      "starters": [],
-      "phone": "15145474826",
-      "address": "Fuhlestrasse"
-    },
-    {
-      "id": 1753184537956,
-      "date": "2025-07-24",
-      "hour": "17:00",
-      "table": 1,
-      "duration": 2,
-      "ppl": 1,
-      "starters": [],
-      "phone": "15145474826",
-      "address": "Fuhlestrasse"
+      "phone": "brak-telefonu",
+      "address": "brak-adresu"
     }
   ],
   "events": [

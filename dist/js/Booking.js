@@ -142,96 +142,102 @@ class Booking {
         thisBooking.parseData(bookings, eventsCurrent, eventsRepeat);
       });
   }
+parseData(bookings, eventsCurrent, eventsRepeat) {
+  const thisBooking = this;
 
-  parseData(bookings, eventsCurrent, eventsRepeat) {
-    const thisBooking = this;
+  // ✅ Czyścimy rezerwacje tylko raz – na początku
+  thisBooking.booked = {};
 
-    thisBooking.booked = {};
-
-    const makeBooked = function (date, hour, duration, table) {
-      // Tworzymy obiekt dla konkretnej daty, jeśli nie istnieje
-      if (typeof thisBooking.booked[date] === 'undefined') {
-        thisBooking.booked[date] = {};
-      }
-
-      // Konwertujemy godzinę np. "17:30" → 17.5
-      const startHour = utils.hourToNumber(hour);
-
-      // Zaznaczamy każdy 30-minutowy blok jako zajęty
-      for (let hourBlock = startHour; hourBlock < startHour + duration; hourBlock += 0.5) {
-        if (typeof thisBooking.booked[date][hourBlock] === 'undefined') {
-          thisBooking.booked[date][hourBlock] = [];
-        }
-
-        thisBooking.booked[date][hourBlock].push(parseInt(table));
-
-
-        // Logujemy każdy wpis — przydatne do debugowania
-        console.log(
-          `📅 Rezerwacja: ${date}, godzina: ${hourBlock}, stolik: ${table}`
-        );
-      }
-    };
-
-    // Przetwarzamy rezerwacje jednorazowe
-    for (let item of bookings) {
-      makeBooked(item.date, item.hour, item.duration, item.table);
+  // ✅ Funkcja pomocnicza do dodawania pojedynczej rezerwacji
+  const makeBooked = (date, hour, duration, table) => {
+    // 🛡️ Zabezpieczenie na błędny typ stolika
+    const parsedTable = parseInt(table);
+    if (isNaN(parsedTable)) {
+      console.warn('❌ Nieprawidłowy stolik:', table);
+      return;
     }
 
-    // Przetwarzamy aktualne eventy
-    for (let item of eventsCurrent) {
-      makeBooked(item.date, item.hour, item.duration, item.table);
+    if (!thisBooking.booked[date]) {
+      thisBooking.booked[date] = {};
     }
 
-    // Przetwarzamy powtarzające się eventy (np. codziennie)
-    for (let item of eventsRepeat) {
-      if (item.repeat === 'daily') {
-        for (let i = 0; i < 14; i++) {
-          const date = utils.dateToStr(utils.addDays(new Date(), i));
-          makeBooked(date, item.hour, item.duration, item.table);
-        }
+    const startHour = utils.hourToNumber(hour);
+
+    for (let hourBlock = startHour; hourBlock < startHour + duration; hourBlock += 0.5) {
+      if (!thisBooking.booked[date][hourBlock]) {
+        thisBooking.booked[date][hourBlock] = [];
       }
-    }
+      thisBooking.booked[date][hourBlock].push(parsedTable);
 
-    // Odświeżamy interfejs, żeby pokazać aktualny stan stolików
-    thisBooking.updateDOM();
+      console.log(`📌 BOOKED: data=${date}, godz=${hourBlock}, stolik=${parsedTable}`);
+    }
+  };
+
+  // ✅ Przetwarzamy wszystkie źródła rezerwacji
+  for (let item of bookings) {
+    makeBooked(item.date, item.hour, item.duration, item.table);
   }
 
+  for (let item of eventsCurrent) {
+    makeBooked(item.date, item.hour, item.duration, item.table);
+  }
 
+  for (let item of eventsRepeat) {
+    if (item.repeat === 'daily') {
+      for (let i = 0; i < 14; i++) {
+        const date = utils.dateToStr(utils.addDays(new Date(), i));
+        makeBooked(date, item.hour, item.duration, item.table);
+      }
+    }
+  }
+
+  // 🔁 Odśwież widok dostępności
+  thisBooking.updateDOM();
+}
+
+ 
   updateDOM() {
-    const thisBooking = this;
+  const thisBooking = this;
 
-    const date = thisBooking.datePicker.value;
+  // 🗓️ Pobieramy datę i godzinę
+  const date = thisBooking.datePicker?.value || '';
+  const rawHour = thisBooking.hourPicker?.value;
 
-    const hour = typeof thisBooking.hourPicker.value === 'string'
-      ? utils.hourToNumber(thisBooking.hourPicker.value)
-      : thisBooking.hourPicker.value;
-
-    console.log('Zarejestrowane stoliki:');
-    for (let table of thisBooking.dom.tables) {
-      const tableId = table.getAttribute(settings.booking.tableIdAttribute);
-      console.log('🪑 stolik ma data-table =', tableId);
-    }
-
-
-
-    for (let table of thisBooking.dom.tables) {
-      const tableId = parseInt(table.getAttribute(settings.booking.tableIdAttribute));
-
-      if (
-        thisBooking.booked[date] &&
-        thisBooking.booked[date][hour] &&
-        thisBooking.booked[date][hour].includes(tableId)
-      ) {
-        table.classList.add(classNames.booking.tableBooked);
-        table.classList.remove('selected');
-      } else {
-        table.classList.remove(classNames.booking.tableBooked);
-      }
-    }
+  let hour = 0;
+  if (typeof rawHour === 'string') {
+    hour = utils.hourToNumber(rawHour);
+  } else if (typeof rawHour === 'number') {
+    hour = rawHour;
+  } else {
+    console.warn('⛔ Nieprawidłowa godzina:', rawHour);
+    hour = 0; // domyślna godzina awaryjna
   }
 
-  initTables() {
+  console.log(`🔄 updateDOM: data = ${date}, godzina = ${hour}`);
+
+  for (let table of thisBooking.dom.tables) {
+    const tableId = parseInt(table.getAttribute(settings.booking.tableIdAttribute));
+
+    // Sprawdzamy czy stolik ma być zablokowany
+    const isBooked =
+      thisBooking.booked[date] &&
+      thisBooking.booked[date][hour] &&
+      thisBooking.booked[date][hour].includes(tableId);
+
+    if (isBooked) {
+      table.classList.add(classNames.booking.tableBooked);
+      table.classList.remove('selected');
+      console.log(`🧱 Stolik ${tableId} ZAJĘTY`);
+    } else {
+      table.classList.remove(classNames.booking.tableBooked);
+      console.log(`✅ Stolik ${tableId} WOLNY`);
+    }
+  }
+}
+
+
+
+    initTables() {
     const thisBooking = this;
 
     for (let table of thisBooking.dom.tables) {
