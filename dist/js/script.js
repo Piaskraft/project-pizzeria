@@ -261,40 +261,61 @@ homeContainer.innerHTML = generatedHomeHTML;
   }
 };
 // ---- PROSTA KARUZELA ----
-function initCarousel() {
-  const track     = document.querySelector('.carousel__track');
-  const slides    = Array.from(track.children);
-  const prevBtn   = document.querySelector('.carousel__nav--prev');
-  const nextBtn   = document.querySelector('.carousel__nav--next');
+function initCarouselAuto() {
+  const track      = document.querySelector('.carousel__track');
+  const slides     = Array.from(track.children);
+  const prevBtn    = document.querySelector('.carousel__nav--prev');
+  const nextBtn    = document.querySelector('.carousel__nav--next');
+  const dotsNav    = document.querySelector('.carousel__nav-dots');
+  const dots       = Array.from(dotsNav.children);
   const slideWidth = slides[0].getBoundingClientRect().width;
+  let currentIndex = 0;
+  const intervalTime = 5000; // 5 sekund
+  let slideInterval;
 
-  slides.forEach((slide, index) => {
-    slide.style.left = slideWidth * index + 'px';
+  // ustawiamy pozycje slajdów
+  slides.forEach((slide, idx) => {
+    slide.style.left = slideWidth * idx + 'px';
   });
 
-  let currentIndex = 0;
-
-  function moveToSlide(index) {
-    track.style.transform = 'translateX(-' + slideWidth * index + 'px)';
-    currentIndex = index;
+  function goToSlide(newIndex) {
+    track.style.transform = `translateX(-${slideWidth * newIndex}px)`;
+    slides[currentIndex].classList.remove('current-slide');
+    slides[newIndex].classList.add('current-slide');
+    dots[currentIndex].classList.remove('current-slide');
+    dots[newIndex].classList.add('current-slide');
+    currentIndex = newIndex;
   }
 
-  prevBtn.addEventListener('click', () => {
-    const newIndex = currentIndex === 0
-      ? slides.length - 1
-      : currentIndex - 1;
-    moveToSlide(newIndex);
+  function nextSlide() {
+    goToSlide( (currentIndex + 1) % slides.length );
+  }
+  function prevSlide() {
+    goToSlide( (currentIndex - 1 + slides.length) % slides.length );
+  }
+
+  nextBtn.addEventListener('click', () => { nextSlide(); resetInterval(); });
+  prevBtn.addEventListener('click', () => { prevSlide(); resetInterval(); });
+
+  dotsNav.addEventListener('click', e => {
+    if (!e.target.matches('button')) return;
+    const idx = parseInt(e.target.dataset.slide, 10);
+    goToSlide(idx);
+    resetInterval();
   });
 
-  nextBtn.addEventListener('click', () => {
-    const newIndex = currentIndex === slides.length - 1
-      ? 0
-      : currentIndex + 1;
-    moveToSlide(newIndex);
-  });
+  function startInterval() {
+    slideInterval = setInterval(nextSlide, intervalTime);
+  }
+  function resetInterval() {
+    clearInterval(slideInterval);
+    startInterval();
+  }
+
+  startInterval();
 }
 
-document.addEventListener('DOMContentLoaded', initCarousel);
+document.addEventListener('DOMContentLoaded', initCarouselAuto);
 
 
 app.init();
