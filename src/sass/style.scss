@@ -261,7 +261,9 @@
 }
 .carousel__nav--next {
   right: 1rem;
+  display: none;
 }
+
 /* NAVIGACJA DOTS */
 .carousel__nav-dots {
   text-align: center;
@@ -280,7 +282,4 @@
 }
 .carousel__indicator.current-slide {
   background: #333;
-}
-.carousel__nav--next {
-  display: none;
 }
