@@ -169,27 +169,33 @@ class Product {
 
 
 const app = {
-  initPages: function () {
+ initPages: function(){
     const thisApp = this;
-    thisApp.pages = document.querySelector(select.containerOf.pages).children;
+
+    thisApp.pages = document.querySelector(select.containerOf.pages).children;// target <section id="order"> and <section id="booking"> in <div id="pages">
     thisApp.navLinks = document.querySelectorAll(select.nav.links);
     const idFromHash = window.location.hash.replace('#/', '');
+    //thisApp.activatePage(thisApp.pages[0].id); //Activate the first page found in the DOM ("#order" or "#booking") when the application starts.
     let pageMatchingHash = thisApp.pages[0].id;
-    for (let page of thisApp.pages) {
-      if (page.id === idFromHash) {
+
+    for(let page of thisApp.pages){
+      if(page.id == idFromHash){
         pageMatchingHash = page.id;
         break;
       }
     }
+    
     thisApp.activatePage(pageMatchingHash);
-    for (let link of thisApp.navLinks) {
-      link.addEventListener('click', function (event) {
+
+    for(let link of thisApp.navLinks){
+      link.addEventListener('click', function(event){
         event.preventDefault();
         const clickedElement = this;
-        const id = clickedElement.getAttribute('href').replace('#', '');
+        const id = clickedElement.getAttribute('href').replace('#', '');// delete # <a href="#order"> to target <section id="order">
         thisApp.activatePage(id);
+
         window.location.hash = '#/' + id;
-      });
+      })
     }
   },
 
@@ -243,6 +249,10 @@ const app = {
     thisApp.initData();
     thisApp.initCart();
     thisApp.initBooking();
+    const homeContainer = document.querySelector('#home');
+const generatedHomeHTML = templates.home();
+homeContainer.innerHTML = generatedHomeHTML;
+
 
     const productList = document.querySelector(select.containerOf.menu);
     productList.addEventListener('add-to-cart', function (event) {
@@ -250,6 +260,42 @@ const app = {
     });
   }
 };
+// ---- PROSTA KARUZELA ----
+function initCarousel() {
+  const track     = document.querySelector('.carousel__track');
+  const slides    = Array.from(track.children);
+  const prevBtn   = document.querySelector('.carousel__nav--prev');
+  const nextBtn   = document.querySelector('.carousel__nav--next');
+  const slideWidth = slides[0].getBoundingClientRect().width;
+
+  slides.forEach((slide, index) => {
+    slide.style.left = slideWidth * index + 'px';
+  });
+
+  let currentIndex = 0;
+
+  function moveToSlide(index) {
+    track.style.transform = 'translateX(-' + slideWidth * index + 'px)';
+    currentIndex = index;
+  }
+
+  prevBtn.addEventListener('click', () => {
+    const newIndex = currentIndex === 0
+      ? slides.length - 1
+      : currentIndex - 1;
+    moveToSlide(newIndex);
+  });
+
+  nextBtn.addEventListener('click', () => {
+    const newIndex = currentIndex === slides.length - 1
+      ? 0
+      : currentIndex + 1;
+    moveToSlide(newIndex);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', initCarousel);
+
 
 app.init();
 console.log('script.js działa ✅');

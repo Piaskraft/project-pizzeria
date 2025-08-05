@@ -2,19 +2,19 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" >
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
-  <meta http-equiv="X-UA-Compatible" content="ie=edge" >
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Pizzeria</title>
 
   <link href="https://fonts.googleapis.com/css?family=Lato:400,300i,700%7COswald:300,500,700&subset=latin-ext"
-    rel="stylesheet" >
-  <link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" rel="stylesheet" >
+    rel="stylesheet">
+  <link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" rel="stylesheet">
 
-  <link rel="stylesheet" href="css/style.css" >
+  <link rel="stylesheet" href="css/style.css">
 
   <!-- FLATPICKR -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" >
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 </head>
 
@@ -28,6 +28,7 @@
           <h2 class="logo__subtitle">the best homemade Italian food</h2>
         </div>
         <div class="main-nav">
+          <a href="#/home">Home</a>
           <a href="#order">Order</a>
           <a href="#booking">Booking</a>
         </div>
@@ -68,7 +69,10 @@
   </header>
 
   <div id="pages">
+    <div id="home"></div>
+
     <section id="order">
+
       <div id="product-list" class="product-list container"></div>
     </section>
     <section id="booking">
@@ -253,6 +257,166 @@
       </form>
     </div>
   </script>
+  <script id="template-home" type="text/x-handlebars-template">
+  <!-- HERO -->
+  <section class="home__hero" style="background-image: url('/images/home/pizza-5.jpg');">
+    <div class="home__hero-wrapper container">
+      <h2 class="home__title">Witamy w naszej Pizzerii!</h2>
+      <p class="home__description">Najlepsza pizza w mieście — zamów już teraz!</p>
+      <a class="btn btn-primary" href="#/order">Zamów online</a>
+    </div>
+  </section>
+
+  <!-- CTA: Order / Booking -->
+  <section class="home__actions container">
+    <div class="actions-grid">
+      <a href="#/order" class="action action--order">
+        <div class="action__overlay"></div>
+        <h3>Order Online</h3>
+      </a>
+      <a href="#/booking" class="action action--booking">
+        <div class="action__overlay"></div>
+        <h3>Book a Table</h3>
+      </a>
+    </div>
+  </section>
+
+  <!-- Opening Hours -->
+  <section class="home__hours container">
+    <div class="home__hours-box">
+      <h3>Opening Hours:</h3>
+      <p>Tue–Sun, 12PM – 12AM</p>
+    </div>
+  </section>
+  <!-- Carousel -->
+  <section class="home__carousel container">
+  <div class="carousel">
+    <button class="carousel__nav carousel__nav--prev">&larr;</button>
+    <div class="carousel__track-container">
+      <ul class="carousel__track">
+        <li class="carousel__slide current-slide">
+          <div class="carousel__item-content">
+            <img src="/images/home/pizza-3.jpg" alt="Pizzeria Mamma Mia">
+            <div class="carousel__slide-text">
+              <h4>Nasza klasyczna Margherita</h4>
+              <p>Soczyste pomidory, świeża bazylia i mozzarella di bufala.</p>
+            </div>
+          </div>
+        </li>
+        <li class="carousel__slide">
+          <div class="carousel__item-content">
+            <img src="/images/home/pizza-4.jpg" alt="Pizzeria Mamma Mia">
+            <div class="carousel__slide-text">
+              <h4>Pizza Funghi</h4>
+              <p>Wyjątkowy smak z leśnymi grzybami i oliwą truflową.</p>
+            </div>
+          </div>
+        </li>
+        <li class="carousel__slide">
+          <div class="carousel__item-content">
+            <img src="/images/home/pizza-9.jpg" alt="Pizzeria Mamma Mia">
+            <div class="carousel__slide-text">
+              <h4>Pepperoni Supreme</h4>
+              <p>Pikantne pepperoni podwójnie obłożone serem.</p>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <button class="carousel__nav carousel__nav--next">&rarr;</button>
+  </div>
+</section>
+
+
+  <!-- Testimonials -->
+  <section class="home__testimonials container">
+    <div class="testimonials-slider">
+      {{!-- tutaj w przyszłości możesz podpiąć prawdziwą karuzelę JS --}}
+      <div class="testimonial">
+        <img src="/images/home/pizza-2.jpg" alt="Customer">
+        <div class="testimonial__text">
+          <p>"Amazing service! Lorem ipsum dolor sit amet..."</p>
+          <span>– Margaret Osborne</span>
+        </div>
+      </div>
+      <div class="testimonial">
+        <img src="/images/home/pizza-1.jpg" alt="Customer">
+        <div class="testimonial__text">
+          <p>"Best pizza in town, highly recommend!"</p>
+          <span>– John Smith</span>
+        </div>
+      </div>
+      <!-- kolejne slajdy… -->
+    </div>
+  </section>
+
+  <!-- Instagram Feed -->
+  <section class="home__instagram container">
+    <div class="instagram-grid">
+      <a href="https://instagram.com/yourprofile" target="_blank">
+        <img src="/images/instagram/1.jpg" alt="">
+      </a>
+      <a href="https://instagram.com/yourprofile" target="_blank">
+        <img src="/images/instagram/2.jpg" alt="">
+      </a>
+      <a href="https://instagram.com/yourprofile" target="_blank">
+        <img src="/images/instagram/3.jpg" alt="">
+      </a>
+      <a href="https://instagram.com/yourprofile" target="_blank">
+        <img src="/images/instagram/4.jpg" alt="">
+      </a>
+      <a href="https://instagram.com/yourprofile" target="_blank">
+        <img src="/images/instagram/5.jpg" alt="">
+      </a>
+      <a href="https://instagram.com/yourprofile" target="_blank">
+        <img src="/images/instagram/6.jpg" alt="">
+      </a>
+    </div>
+    <p class="instagram__more">
+      <a href="https://instagram.com/yourprofile" target="_blank">View more on Instagram</a>
+    </p>
+  </section>
+
+  <!-- O NAS -->
+  <section class="home__about container">
+    <h2>O nas</h2>
+    <p>Jesteśmy rodzinną pizzerią z pasją do włoskich smaków. Od 1995 roku pieczemy pizze na kamiennym piecu,
+      korzystając tylko ze świeżych, naturalnych składników.</p>
+  </section>
+
+  <!-- DLACZEGO MY -->
+  <section class="home__features container">
+    <h2>Dlaczego my?</h2>
+    <div class="features-list">
+      <div class="feature">
+        <h3>Szybka dostawa</h3>
+        <p>Zamówienia realizujemy w 30 minut lub… pizzę masz za darmo!</p>
+      </div>
+      <div class="feature">
+        <h3>Świeże składniki</h3>
+        <p>Codziennie dostarczamy świeże warzywa i sery od lokalnych dostawców.</p>
+      </div>
+      <div class="feature">
+        <h3>Tradycyjne przepisy</h3>
+        <p>Opieramy się na recepturach prosto z Neapolu przekazywanych z pokolenia na pokolenie.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- E-BOOK (na dole) -->
+  <section class="home__ebook container">
+    <img src="/images/home/pizza-6.jpg" alt="Okładka e-booka Pizzeria" class="home__ebook-cover">
+    <div class="home__ebook-content">
+      <h3>Pobierz nasz darmowy e-book “Sekrety włoskiej pizzy”</h3>
+      <p>Poznaj przepisy, techniki wyrabiania ciasta i triki mistrzów kuchni.</p>
+      <a href="/files/pizzeria-ebook.pdf" download class="btn btn-secondary">
+        Pobierz e-book
+      </a>
+    </div>
+  </section>
+  </script>
+
+
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js"></script>
   <script src="js/functions.js"></script>
